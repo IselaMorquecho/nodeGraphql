@@ -1,0 +1,55 @@
+type Query {
+  hello: String
+  product(id: ID!): Product
+  products: [Product!]!
+  category(id: ID!): Category
+}
+
+type Mutation {
+  addProduct(inputData: addProductInput): Product
+  login(email: EmailAddress, password: String!): AuthResponse
+  addCategory(input: CreateCategoryInput): Category
+}
+
+type Product {
+  id: ID!
+  name: String!
+  price: Float!
+  description: String!
+  image: String!
+  createdAt: String
+}
+
+input addProductInput {
+  name: String!
+  price: Float!
+  description: String!
+  image: String!
+  categoryId: ID!
+}
+
+type AuthResponse {
+  access_token: String!
+  user: User!
+}
+
+type User {
+  id: ID!
+  email: String!
+  role: String!
+  createdAt: String!
+}
+
+type Category {
+  id: ID!
+  name: String!
+  image: String!
+  products: [Category]
+}
+
+input CreateCategoryInput {
+  name: CategoryNameType
+  image: String!
+}
+
+scalar CategoryNameType
